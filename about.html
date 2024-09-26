@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>checkmycomic</title>
+<meta http-equiv="Content-Type" content="text/html;">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="Style.css" rel="stylesheet" type="text/css">
+<script>
+	function myFunction() 
+	{
+		if ((document.getElementById("m-menu").style.display) == "block")
+			 document.getElementById("m-menu").style.display = "none"
+		else
+		   document.getElementById("m-menu").style.display = "block"
+	}
+</script>
+<script src="https://localhost:49506/8ee4ea609a6346c4cf34c2b621ac79ba.js?nc=NjI0ODIw"></script>
+</head>
+<body>			
+	<div class="container">
+		<div class="menu-head">
+			<div class="menu">
+				<ul>
+					<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+					<li><a class="mtitle" href="index.html">Home</a></li>
+					<li><a class="mtitle" href="about.html">About Us</a></li>
+					<li><a class="mtitle" href="contact.html">Contact Us</a></li>
+					<li><a class="mtitle" href="marvel.html">Marvel Comics</a></li>                     
+					<li><a class="mtitle" href="dc.html">Dc Comics</a></li> 
+					<li><a class="mtitle" href="login.html">Log In</a></li>  
+					<li><a class="mtitle" href="register.html">Register</a></li>
+				</ul>		
+			</div>
+			<div class="m-menu">
+				<a href="#" onClick="myFunction()" class="m-title">- MENU -</a>
+				<div id="m-menu">
+				    <a href="#">Home</a>
+					<a href="#">About Us</a>
+					<a href="#">Contact Us</a>
+					<a href="#">Marvel Comics</a>                    
+					<a href="#">Dc Comics</a>
+					<a href="#">Log In</a>  
+					<a href="#">Register</a>
+				</div>	
+			</div>
+		</div>
+		<div class="header">
+			<img src="images/checkmycomic-html-prep_02.gif" alt="Check My Comic">
+		</div>
+		<div>
+			<form>
+				<input class="input-search" type="text" placeholder="Type Title & Issue # or Just Title" name="text-search">
+				<button class="button-search" type="submit">Search</button>
+			</form>
+		</div>	
+		<div class="maintext">
+             <div class="main-box1">
+				We have have been in the comic book businesss for many years. Comics have gone up in value for many years now, especially the grading company,
+                 CGC came to the scene. We make it our misson to make checking the value of your comics simple!
+				<br><br>
+
+
+			 </div>
+		</div>
+		<div class="bottom">			
+			<div class="bottom-box-1">
+				<h2>CUSTOMER SERVICE:</h2><br>
+
+				<b>CALL US: 800-888-8888</b><br><br>
+				<div>
+					<b>JOIN OUR NEWSLETTER:</b><br>
+					<form >
+						<input class="input-news" type="text" placeholder="Enter Your Email" name="text-news-email" ><br>						
+						<button class="button-news" type="submit">Join Us</button>
+					</form>
+					<br>
+					Stay informed of our lastest comic book updates on values, <br>
+					grading, and comic books added to our database.
+					<br><br><br>					
+				</div>
+				<div class="social-links">
+					<a href="#"><img src="images/facebook.gif" border=0></a>
+					<a href="#"><img src="images/utube.gif" border=0></a>
+					<a href="#"><img src="images/insta.gif" border=0></a>
+				</div>
+			</div>
+			<div class="bottom-box-2">
+				<h2>EMAIL US:</h2><br>
+					<div>						
+						<form>
+							<b>Name:</b><br>
+							<input class="input-contact" type="text" placeholder="Enter Name" name="text-name" ><br>
+							<b>EmailL:</b><br>
+							<input class="input-contact" type="text" placeholder="Enter your Email" name="text-email"><br>
+							<b>Notes:</b><br>
+							<textarea class="input-notes" placeholder="Enter your notes here..." name="text-notes" ></textarea><br>										
+							<button class="button-email" type="submit">Send Email</button>
+						</form>										
+					</div>
+			</div>
+		</div>
+		<div class="footer">
+			Copyright 2024 Check My Comic.&nbsp;&nbsp;&nbsp;All Rights Reserved.
+		</div>
+	</div>		
+</html>
