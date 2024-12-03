@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CheckMyComic</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="menu">
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/about">About Us</a></li>
+      <li><a href="/contact">Contact Us</a></li>
+      <li><a href="/marvel">Marvel Comics</a></li>
+      <li><a href="/dc">DC Comics</a></li>
+      
+      <% if (user) { %>
+        <li>Welcome, <strong><%= user.name %></strong>!</li>
+        <li><a href="/logout">Logout</a></li>
+      <% } else { %>
+        <li><a href="/login">Log In</a></li>
+        <li><a href="/register">Register</a></li>
+      <% } %>
+    </ul>
+  </div>
+
+  <h1>Welcome to CheckMyComic!</h1>
+  <!-- Add your homepage content here -->
+
+</body>
+</html>

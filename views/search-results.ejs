@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>checkmycomic</title>
+<meta http-equiv="Content-Type" content="text/html;">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="Style.css" rel="stylesheet" type="text/css">
+<script>
+	function myFunction() 
+	{
+		if ((document.getElementById("m-menu").style.display) == "block")
+			 document.getElementById("m-menu").style.display = "none"
+		else
+		   document.getElementById("m-menu").style.display = "block"
+	}
+</script>
+<script src="https://localhost:49506/8ee4ea609a6346c4cf34c2b621ac79ba.js?nc=NjI0ODIw"></script>
+</head>
+<body>			
+	<div class="container">
+		<div class="menu-head">
+			<div class="menu">
+				<ul>
+					<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+					<li><a class="mtitle" href="index.html">Home</a></li>
+					<li><a class="mtitle" href="about.html">About Us</a></li>
+					<li><a class="mtitle" href="contact.html">Contact Us</a></li>
+					<li><a class="mtitle" href="marvel.html">Marvel Comics</a></li>                     
+					<li><a class="mtitle" href="dc.html">Dc Comics</a></li> 
+					<li><a class="mtitle" href="login.html">Log In</a></li>  
+					<li><a class="mtitle" href="register.html">Register</a></li>
+				</ul>		
+			</div>
+			<div class="m-menu">
+				<a href="#" onClick="myFunction()" class="m-title">- MENU -</a>
+				<div id="m-menu">
+				    <a href="#">Home</a>
+					<a href="#">About Us</a>
+					<a href="#">Contact Us</a>
+					<a href="#">Marvel Comics</a>                    
+					<a href="#">Dc Comics</a>
+					<a href="#">Log In</a>  
+					<a href="#">Register</a>
+				</div>	
+			</div>
+		</div>
+		<div class="header">
+			<img src="images/checkmycomic-html-prep_02.gif" alt="Check My Comic">
+		</div>
+		<div>
+			<form action="/search" method="POST">
+				<input class="input-search" type="text" name="searchTerm" placeholder="Enter comic title or issue number" required>
+				<button class="button-search" type="submit">Search</button>
+			</form>
+			
+		</div>	
+		<style>
+			/* Styling for the grades and values dropdown box */
+			.dropdown-container {
+			  margin-top: 20px;
+			  width: 100%;
+			}
+		
+			.dropdown-header {
+			  cursor: pointer;
+			  padding: 10px;
+			  background-color: #0c85b5;
+			  color: white;
+			  border: none;
+			  text-align: left;
+			  font-weight: bold;
+			  font-size: 16px;
+			  width: 100%;
+			}
+		
+			.dropdown-content {
+			  display: none;
+			  overflow: hidden;
+			  margin-top: 10px;
+			}
+		
+			.grades-table {
+			  width: 100%;
+			  border-collapse: collapse;
+			}
+		
+			.grades-table th, .grades-table td {
+			  border: 1px solid #ddd;
+			  padding: 10px;
+			  text-align: left;
+			}
+		
+			.grades-table th {
+			  background-color: #f2f2f2;
+			  font-weight: bold;
+			}
+		
+			.grades-table tr:nth-child(even) {
+			  background-color: #f9f9f9;
+			}
+		  </style>
+    </head>
+    <body>
+		<!-- MAIN CONTENT SECTION STARTS HERE -->
+		<div class="main-content" style="padding: 10px 0;">			            
+
+			<!-- Dynamic search results content here -->
+			<h1>Search Results for "<%= searchTerm %>"</h1>
+
+			<% if (comic) { %>
+			    <div class="comic-container">
+			        <div>
+			            <!-- Comic image -->
+			            <% if (comic.image_url) { %>
+			                <img src="<%= comic.image_url %>" alt="<%= comic.title %> cover" style="width: 200px; height: auto;">
+			            <% } else { %>
+			                <p>No image available.</p>
+			            <% } %>
+			        </div>
+
+			        <div class="comic-info">
+			            <h2><%= comic.title %> - Issue #<%= comic.issue_number %></h2>
+			            <p><%= comic.description %></p>
+
+			            <!-- Grades and Values -->
+						<div class="dropdown-container">
+							<button class="dropdown-header" onclick="toggleDropdown()">Grades and Values</button>
+							<div id="dropdownContent" class="dropdown-content">
+                        <table class="grades-table">
+                            <thead>
+                                <tr>
+                                    <th>Grade</th>
+                                    <th>Value ($)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% if (grades.length > 0) { %>
+                                    <% grades.forEach((grade) => { %>
+                                        <tr>
+                                            <td><%= grade.grade %></td>
+                                            <td><%= grade.value.toLocaleString() %></td>
+                                        </tr>
+                                    <% }); %>
+                                <% } else { %>
+                                    <tr>
+                                        <td colspan="2">No grades available.</td>
+                                    </tr>
+                                <% } %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+			<% } else { %>
+			    <p>No comics found for "<%= searchTerm %>".</p>
+			<% } %>
+
+			<a href="/">Back to Home</a>
+
+
+			<script>
+				// JavaScript function to toggle the dropdown content
+				function toggleDropdown() {
+				  const dropdownContent = document.getElementById("dropdownContent");
+				  dropdownContent.style.display = dropdownContent.style.display === "block" ? "none" : "block";
+				}
+			  </script>
+
+
+		</div>
+		<!-- MAIN CONTENT SECTION ENDS HERE -->
+
+		<div class="bottom">			
+			<div class="bottom-box-1">
+				<h2>CUSTOMER SERVICE:</h2><br>
+
+				<b>CALL US: 800-888-8888</b><br><br>
+				<div>
+					<b>JOIN OUR NEWSLETTER:</b><br>
+					<form >
+						<input class="input-news" type="text" placeholder="Enter Your Email" name="text-news-email" ><br>						
+						<button class="button-news" type="submit">Join Us</button>
+					</form>
+					<br>
+					Stay informed of our lastest comic book updates on values, <br>
+					grading, and comic books added to our database.
+					<br><br><br>					
+				</div>
+				<div class="social-links">
+					<a href="#"><img src="images/facebook.gif" border=0></a>
+					<a href="#"><img src="images/utube.gif" border=0></a>
+					<a href="#"><img src="images/insta.gif" border=0></a>
+				</div>
+			</div>
+			<div class="bottom-box-2">
+				<h2>EMAIL US:</h2><br>
+					<div>						
+						<form>
+							<b>Name:</b><br>
+							<input class="input-contact" type="text" placeholder="Enter Name" name="text-name" ><br>
+							<b>Email:</b><br>
+							<input class="input-contact" type="text" placeholder="Enter your Email" name="text-email"><br>
+							<b>Notes:</b><br>
+							<textarea class="input-notes" placeholder="Enter your notes here..." name="text-notes" ></textarea><br>										
+							<button class="button-email" type="submit">Send Email</button>
+						</form>										
+
+					</div>
+			</div>
+		</div>
+		<div class="footer">
+			Copyright 2024 Check My Comic.&nbsp;&nbsp;&nbsp;All Rights Reserved.
+		</div>
+	</div>		
+</body>
+</html>

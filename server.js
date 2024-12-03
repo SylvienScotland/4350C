@@ -114,7 +114,6 @@ app.post("/login", (req, res) => {
   });
 });
 
-// Handle registration form submission
 app.post("/register", (req, res) => {
   const { name, email, password, confirm_password } = req.body;
 
@@ -123,23 +122,37 @@ app.post("/register", (req, res) => {
     return res.send("Passwords do not match.");
   }
 
-  // Hash the password before storing it
-  bcrypt.hash(password, 10, (err, hashedPassword) => {
+  // Check if the email already exists
+  userDb.get("SELECT * FROM users WHERE email = ?", [email], (err, existingUser) => {
     if (err) {
-      console.error(err.message);
-      return res.redirect("/register");
+      console.error("Database query error:", err.message);
+      return res.status(500).send("An error occurred.");
     }
 
-    // Insert the new user into the `users.db` database
-    userDb.run("INSERT INTO users (name, email, password) VALUES (?, ?, ?)", [name, email, hashedPassword], (err) => {
+    if (existingUser) {
+      // Email already exists in the database
+      return res.send("Email already registered. Please use a different email.");
+    }
+
+    // Hash the password before storing it
+    bcrypt.hash(password, 10, (err, hashedPassword) => {
       if (err) {
         console.error(err.message);
-        return res.send("Registration failed. Email may already be in use.");
+        return res.redirect("/register");
       }
-      res.redirect("/login");
+
+      // Insert the new user into the `users.db` database
+      userDb.run("INSERT INTO users (name, email, password) VALUES (?, ?, ?)", [name, email, hashedPassword], (err) => {
+        if (err) {
+          console.error("Database insertion error:", err.message);
+          return res.send("Registration failed.");
+        }
+        res.redirect("/login");
+      });
     });
   });
 });
+
 
 // Logout route
 app.get("/logout", (req, res) => {
@@ -150,6 +163,35 @@ app.get("/logout", (req, res) => {
     res.redirect("/");
   });
 });
+
+// Profile page route
+app.get("/profile", (req, res) => {
+  if (!req.session.user) {
+    return res.redirect("/login");
+  }
+  res.render("profile", { user: req.session.user });
+});
+
+// Update profile information
+app.post("/profile", (req, res) => {
+  const { name, email } = req.body;
+  const userId = req.session.user.id;
+
+  // Update the user's info in the database
+  userDb.run("UPDATE users SET name = ?, email = ? WHERE id = ?", [name, email, userId], (err) => {
+    if (err) {
+      console.error("Database error:", err.message);
+      return res.status(500).send("An error occurred while updating profile.");
+    }
+
+    // Update session info
+    req.session.user.name = name;
+    req.session.user.email = email;
+    res.redirect("/profile");
+  });
+});
+
+
 
 // Start the server
 app.listen(port, () => {
